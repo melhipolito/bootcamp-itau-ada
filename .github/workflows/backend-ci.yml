@@ -8,9 +8,15 @@ on:
   workflow_dispatch:
   push:
     branches:
+    - main
     - backend
     paths:
     - '.github/workflows/backend-ci.yml'
+
+env:
+  USER: ${{ github.actor }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  REGISTRY: ghcr.io
 
 jobs:
   Teste:
@@ -26,3 +32,19 @@ jobs:
 
     - name: Build do java
       run: mvn clean package
+    
+    - name: Log into registry ${{ env.REGISTRY }}
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ env.USER }}
+        password: ${{ env.GH_TOKEN }}
+
+    - name: Build Backend Dockerfile
+      run: docker build . --tag backend-app:latest
+
+    - name: Tag Backend Docker image
+      run: docker tag backend-app:latest ${{ env.REGISTRY }}/${{ env.USER }}/backend-app:latest
+
+    - name: Push Backend Docker image
+      run:  docker push ${{ env.REGISTRY }}/${{ env.USER }}/backend-app:latest
