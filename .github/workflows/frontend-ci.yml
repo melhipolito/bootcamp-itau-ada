@@ -29,3 +29,6 @@ jobs:
         run: |
           apt-get update && apt-get -y install npm
           npm install -g @angular/cli
+
+      - name: test app
+        run:  ng test
