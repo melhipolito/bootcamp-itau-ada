@@ -47,5 +47,4 @@ jobs:
 
     - name: Push Backend Docker image
       run:  docker push ${{ env.REGISTRY }}/${{ env.USER }}/backend-app:latest
-      
-      
+            
