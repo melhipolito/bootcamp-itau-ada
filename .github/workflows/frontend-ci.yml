@@ -33,4 +33,5 @@ jobs:
       - name: test app
         run: |
           cd app
+          npm i
           ng test
