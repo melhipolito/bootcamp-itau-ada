@@ -2,7 +2,7 @@ name: Teste backend
 
 defaults:
   run:
-    working-directory: "backend/"
+    working-directory: "backend"
 
 on:
   workflow_dispatch:
