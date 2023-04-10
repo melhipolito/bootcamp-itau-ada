@@ -12,6 +12,11 @@ on:
     paths:
     - '.github/workflows/frontend-ci.yml'
 
+env:
+  USER: ${{ github.actor }}
+  GH_TOKEN: ${{ secrets.TOKEN }}
+  REGISTRY: ghcr.io
+  
 jobs:
   Teste:
     name: Teste frontend
