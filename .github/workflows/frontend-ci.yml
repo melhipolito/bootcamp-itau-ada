@@ -15,7 +15,7 @@ on:
 jobs:
   Teste:
     name: Teste frontend
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -26,9 +26,7 @@ jobs:
           node-version: '14'
         
       - name: Getting dependencies
-        run: |
-          apt-get update && apt-get -y install npm
-          npm install -g @angular/cli
+        run:  npm install -g @angular/cli
 
       - name: test app
         run: |
